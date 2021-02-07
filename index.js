@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const multer = require('multer');
 const path = require('path');
+const url = require('./conn');
 
 const app = express();
 const authRoutes = require('./src/routes/auth');
@@ -50,7 +51,7 @@ app.use((error, req, res, next) => {
 
     res.status(status).json({message: message ,data:  data})
 })
-mongoose.connect('mongodb+srv://prastowo:ZQEmqI6SqnZIj1ac@cluster0.dvkkl.mongodb.net/blog?retryWrites=true&w=majority', { useNewUrlParser: true , useUnifiedTopology: true,})
+mongoose.connect(url, { useNewUrlParser: true , useUnifiedTopology: true})
 .then(() => {
     app.listen(4000, () => console.log('Connection Success'));
 })
